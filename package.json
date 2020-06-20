@@ -1,0 +1,35 @@
+{
+  "name": "teacherfinder-api",
+  "version": "1.0.0",
+  "description": "This is the api rest for teacherFinder app",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node src/index.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon --exec babel-node src/index.js"
+  },
+  "keywords": [
+    "api",
+    "rest",
+    "tech",
+    "teacher",
+    "finder",
+    "students"
+  ],
+  "author": "Jose Sierra",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.19"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/node": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/register": "^7.10.1",
+    "babel-polyfill": "^6.26.0",
+    "env-cmd": "^10.1.0",
+    "install": "^0.13.0",
+    "nodemon": "^2.0.2"
+  }
+}
