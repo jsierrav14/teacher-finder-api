@@ -8,10 +8,10 @@ const teacherSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    lastName:{
-      type:String,
-      required:true,
-      trim:true
+    lastName: {
+        type: String,
+        required: true,
+        trim: true
     },
     email: {
         type: String,
@@ -44,6 +44,20 @@ const teacherSchema = new mongoose.Schema({
             }
         }
 
+    },
+    location: {
+        lat: {
+            type: Number,
+            required: true
+        },
+        lng: {
+            type: Number,
+            required: true
+        },
+        address: {
+            type: String,
+            required: true
+        }
     },
     tokens: [{
         token: {
