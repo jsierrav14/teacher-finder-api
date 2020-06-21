@@ -12,3 +12,5 @@ connect(process.env.MONGO_DB, {
         console.log("Conexion correcta");
     }
 })
+
+

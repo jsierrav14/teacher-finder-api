@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { isEmail } from 'validator';
-
+import jwt from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 
 const teacherSchema = new mongoose.Schema({
     firstName: {
@@ -74,6 +75,38 @@ const teacherSchema = new mongoose.Schema({
 })
 
 
+teacherSchema.methods.generateAuthToken = async function(){
+    const teacher = this;
+    const token = jwt.sign({_id:teacher._id.toString()}, process.env.JWT_KEY);
+    teacher.tokens = teacher.tokens.concat({token})
+    
+    await teacher.save();
+    
+    return token;
+}
+
+teacherSchema.statics.findByCredentials = async(email, password)=>{
+    const teacher = await Teacher.findOne({email:email})
+    if(!teacher){
+        throw new Error('Unable to login')
+    }
+    const isMatch = bcrypt.compare(password, teacher.password)
+
+    if(!isMatch){
+        throw new Error('unable to login')
+    }
+
+    return teacher;
+}
+
+teacherSchema.pre('save', async function(next){
+    const teacher = this;
+    if(teacher.isModified){
+        teacher.password = await bcrypt.hash(teacher.password,8);
+    }
+
+    next();
+})
 
 const Teacher = mongoose.model('Teacher', teacherSchema)
 
