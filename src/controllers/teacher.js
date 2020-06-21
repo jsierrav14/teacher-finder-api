@@ -31,11 +31,11 @@ class TeacherController {
            
         }
     }
-    async login(){
+    async login(req,res){
         try{
-         const teacher = await Teacher.findByCredentials(req.body.email,req.body)
+         const teacher = await Teacher.findByCredentials(req.body.email,req.body.password)
          const token = await teacher.generateAuthToken();
-         res.status(201).send({user,token})
+         res.status(201).send({teacher,token})
         }catch(e){
             res.status(400).send(e)
         }

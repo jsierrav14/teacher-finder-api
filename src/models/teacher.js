@@ -74,7 +74,19 @@ const teacherSchema = new mongoose.Schema({
     timestamps: true
 })
 
+teacherSchema.virtual('topics',{
+    ref:'Topic',
+    localField:'_id',
+    foreignField:'owner'
+})
 
+teacherSchema.methods.toJSON = function(){
+    const teacher = this;
+    const teacherObject = teacher.toObject();
+    delete teacherObject.password;
+    delete teacherObject.tokens;
+    delete teacherObject.avatar;
+}
 teacherSchema.methods.generateAuthToken = async function(){
     const teacher = this;
     const token = jwt.sign({_id:teacher._id.toString()}, process.env.JWT_KEY);
