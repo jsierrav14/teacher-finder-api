@@ -1,4 +1,5 @@
 import Teacher from '../models/teacher'
+
 class TeacherController {
 
     async add(req, res) {
@@ -7,7 +8,8 @@ class TeacherController {
         try {
 
             await teacher.save();
-            res.status(201).send({teacher})
+            const token = await teacher.generateAuthToken();
+            res.status(201).send({teacher,token})
 
         } catch (e) {
             res.status(400).send(e);
@@ -27,6 +29,15 @@ class TeacherController {
             await req.teacher.save();
         } catch (e) {
            
+        }
+    }
+    async login(){
+        try{
+         const teacher = await Teacher.findByCredentials(req.body.email,req.body)
+         const token = await teacher.generateAuthToken();
+         res.status(201).send({user,token})
+        }catch(e){
+            res.status(400).send(e)
         }
     }
 
