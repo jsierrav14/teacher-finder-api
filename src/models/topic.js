@@ -1,9 +1,15 @@
-import moongose from 'mongoose'
+import mongoose from 'mongoose'
 
-const topicSchema = new moongose.Schema({
+const topicSchema = new mongoose.Schema({
     name:{
         type:String,
         required:true
+    },
+    owner:{
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:'Teacher'
+
     }
 })
 
