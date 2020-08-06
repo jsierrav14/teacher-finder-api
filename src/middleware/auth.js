@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
 import Teacher from '../models/teacher'
-import Student from '../models/student'
 
 export const authTeacher =  async(req,res,next)=>{
 
