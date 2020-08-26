@@ -1,6 +1,6 @@
 import { connect } from 'mongoose';
-
-connect(process.env.MONGO_DB, {
+import {conf} from './config'  
+connect(conf.development, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify:false,

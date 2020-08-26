@@ -51,7 +51,6 @@ class TeacherController {
 
         }
         
-
         try {
 
             let results = await User.find(filter, null, {
