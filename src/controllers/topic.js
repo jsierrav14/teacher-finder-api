@@ -8,7 +8,7 @@ class TopicController {
         const topic = new Topic(
         {
             ...req.body,
-            owner:req.teacher._id
+            owner:req.user._id
         });
         try{
          await topic.save();
@@ -30,7 +30,7 @@ class TopicController {
 
         try {
             
-        await req.teacher.populate({
+        await req.user.populate({
             path:'topics',
             options:{
                 limit:parseInt(req.query.limit),
@@ -39,7 +39,7 @@ class TopicController {
             }
         }).execPopulate();
 
-        res.status(200).send(req.teacher.topics)
+        res.status(200).send(req.user.topics)
 
         } catch (error) {
             console.log(error)

@@ -1,19 +1,19 @@
 import jwt from 'jsonwebtoken'
-import Teacher from '../models/teacher'
+import User from '../models/user'
 
-export const authTeacher =  async(req,res,next)=>{
+export const auth =  async(req,res,next)=>{
 
 
     try{
         const token = req.header('Authorization').replace('Bearer ', '')
         const decode = jwt.verify(token, process.env.JWT_KEY)
-        const user = await Teacher.findOne({_id:decode._id,'tokens.token':token});
+        const user = await User.findOne({_id:decode._id,'tokens.token':token});
 
         if(!user){
             throw new Error();
         }
         req.token =token;
-        req.teacher = user;
+        req.user = user;
         next();
 
     }catch(e){
