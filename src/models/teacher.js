@@ -34,6 +34,7 @@ const teacherSchema = new mongoose.Schema({
         }
 
     },
+  
     password: {
         type: String,
         trim: true,
