@@ -83,6 +83,7 @@ const userSchema = new mongoose.Schema({
 }, {
     timestamps: true,
     toJSON: {
+        virtuals:true,
         transform: function (doc, ret) {
             delete ret.password;
             delete ret.tokens;
@@ -103,7 +104,6 @@ userSchema.virtual('questions',{
     localField:'_id',
     foreignField:'owner'
 })
-
 
 /*userSchema.methods.toJSON = function () {
 //    const user = this;
