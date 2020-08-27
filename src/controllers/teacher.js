@@ -57,7 +57,7 @@ class TeacherController {
                 limit: parseInt(req.query.limit),
                 skip: parseInt(req.query.skip),
                 sort: sort
-            }).exec()
+            }).populate({path:'topics'}).exec()
             res.status(200).send(results)
 
         } catch (error) {
