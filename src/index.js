@@ -4,7 +4,7 @@ import express, { json } from 'express'
 import teacherRouter from './routes/teacher'
 import topicRouter from './routes/topic'
 import userRouter from './routes/user'
-import { conf } from "./connection/config";
+import studentRouter from './routes/student'
 
 const app = express();
 
@@ -13,11 +13,11 @@ app.use(json());
 app.use(teacherRouter)
 app.use(topicRouter);
 app.use(userRouter)
+app.use(studentRouter)
 
-app.get('/',(req,res)=>{
-     res.send('Welcome!!!!')
+app.get('/', (req, res) => {
+  res.send('Welcome!!!!')
 })
 app.listen(port, () => {
-  console.log(conf.development)
   console.log('Server is up in port ' + port);
 })
