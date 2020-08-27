@@ -11,7 +11,8 @@ class StudentController {
         if(!isValidOperation){
             return res.status(400).send('Invalid update')
         }
-
+ 
+        
         try{
             updates.forEach(update => req.user[update] = req.body[update])
             await req.user.save();
